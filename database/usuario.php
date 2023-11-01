@@ -20,6 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bindParam(':Estado', $_POST['Estado']);
     $stmt->execute();
     echo json_encode(array('message' => 'Usuario creado'));
+     //detectar peticiones vacias para evitar errores
+     if (empty($_POST['Nombre']) || empty($_POST['Correo']) || empty($_POST['Contrasena']) || empty($_POST['Direccion']) || empty($_POST['Token_FB']) || empty($_POST['Estado'])) {
+        echo json_encode(array('message' => 'Faltan datos'));
+        return;
+    }
 }
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $db = new ConnectionDB();
