@@ -10,22 +10,24 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $db = new ConnectionDB();
-    $sql = "INSERT INTO purificadora (nombre, correo, contrasena) VALUES (:nombre, :correo, :contrasena)";
+    $sql = "INSERT INTO purificadora (nombre, correo, contrasena, telefono) VALUES (:nombre, :correo, :contrasena, :telefono)";
     $stmt = $db->db->prepare($sql);
     $stmt->bindParam(':nombre', $_POST['nombre']);
     $stmt->bindParam(':correo', $_POST['correo']);
     $stmt->bindParam(':contrasena', $_POST['contrasena']);
+    $stmt->bindParam(':telefono', $_POST['telefono']);
     $stmt->execute();
     echo json_encode(array('message' => 'Purificadora creada'));
 }
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $db = new ConnectionDB();
-    $sql = "UPDATE purificadora SET nombre = :nombre, correo = :correo, contrasena = :contrasena WHERE ID = :ID";
+    $sql = "UPDATE purificadora SET nombre = :nombre, correo = :correo, contrasena = :contrasena, telefono = :telefono WHERE ID = :ID";
     $stmt = $db->db->prepare($sql);
     $stmt->bindParam(':ID', $_GET['ID']);
     $stmt->bindParam(':nombre', $_POST['nombre']);
     $stmt->bindParam(':correo', $_POST['correo']);
     $stmt->bindParam(':contrasena', $_POST['contrasena']);
+    $stmt->bindParam(':telefono', $_POST['telefono']);
     $stmt->execute();
     echo json_encode(array('message' => 'Purificadora actualizada'));
 }

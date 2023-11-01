@@ -29,7 +29,8 @@ class ConnectionDB
                 Correo VARCHAR(255),
                 Contrasena VARCHAR(255),
                 Direccion VARCHAR(255),
-                Token_FB VARCHAR(255)
+                Token_FB VARCHAR(255),
+                Estado VARCHAR(255)
             );
 
             CREATE TABLE pedidos (
@@ -45,7 +46,8 @@ class ConnectionDB
                 ID INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(255),
                 correo VARCHAR(255),
-                contrasena VARCHAR(255)
+                contrasena VARCHAR(255),
+                telefono VARCHAR(255)
             );
 
             CREATE TABLE enviados (

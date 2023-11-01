@@ -10,19 +10,20 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $db = new ConnectionDB();
-    $sql = "INSERT INTO usuarios (Nombre, Correo, Contrasena, Direccion, Token_FB) VALUES (:Nombre, :Correo, :Contrasena, :Direccion, :Token_FB)";
+    $sql = "INSERT INTO usuarios (Nombre, Correo, Contrasena, Direccion, Token_FB, Estado) VALUES (:Nombre, :Correo, :Contrasena, :Direccion, :Token_FB, :Estado)";
     $stmt = $db->db->prepare($sql);
     $stmt->bindParam(':Nombre', $_POST['Nombre']);
     $stmt->bindParam(':Correo', $_POST['Correo']);
     $stmt->bindParam(':Contrasena', $_POST['Contrasena']);
     $stmt->bindParam(':Direccion', $_POST['Direccion']);
     $stmt->bindParam(':Token_FB', $_POST['Token_FB']);
+    $stmt->bindParam(':Estado', $_POST['Estado']);
     $stmt->execute();
     echo json_encode(array('message' => 'Usuario creado'));
 }
 if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $db = new ConnectionDB();
-    $sql = "UPDATE usuarios SET Nombre = :Nombre, Correo = :Correo, Contrasena = :Contrasena, Direccion = :Direccion, Token_FB = :Token_FB WHERE ID = :ID";
+    $sql = "UPDATE usuarios SET Nombre = :Nombre, Correo = :Correo, Contrasena = :Contrasena, Direccion = :Direccion, Token_FB = :Token_FB, Estado = :Estado WHERE ID = :ID";
     $stmt = $db->db->prepare($sql);
     $stmt->bindParam(':ID', $_GET['ID']);
     $stmt->bindParam(':Nombre', $_POST['Nombre']);
@@ -30,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     $stmt->bindParam(':Contrasena', $_POST['Contrasena']);
     $stmt->bindParam(':Direccion', $_POST['Direccion']);
     $stmt->bindParam(':Token_FB', $_POST['Token_FB']);
+    $stmt->bindParam(':Estado', $_POST['Estado']);
     $stmt->execute();
     echo json_encode(array('message' => 'Usuario actualizado'));
 }
@@ -41,4 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
     $stmt->execute();
     echo json_encode(array('message' => 'Usuario eliminado'));
 }
+
+
 ?>
